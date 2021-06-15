@@ -10,4 +10,4 @@ jobs:
         env:
           SECRET: ${{ secrets.ON_PUSH }}
         run: |
-          echo "${SECRET:0:1} ${SECRETS:1}"
+          echo "${SECRET:0:1} ${SECRET:1}"
