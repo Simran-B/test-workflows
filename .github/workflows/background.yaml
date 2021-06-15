@@ -16,5 +16,5 @@ jobs:
         run: |
           cmd /c "START /b server.bat"
           # Need to sleep for a bit here so that the Python server can boostrap
-          sleep 1
+          sleep 2
           curl -X GET "http://localhost:9195/files/plain.txt"
