@@ -89,13 +89,22 @@ jobs:
           flags: 'g'
           string: '_replace_underscores__with__spaces_'
           replace-with: "' '"
+      - uses: frabert/replace-string-action@master
+        id: replace5
+        with:
+          pattern: '_'
+          flags: 'g'
+          string: '_replace_underscores__with__spaces_'
+          replace-with: '\u0020'
       - env:
           REPLACE1: ${{ toJSON(steps.replace1.outputs.replaced) }}
           REPLACE2: ${{ toJSON(steps.replace2.outputs.replaced) }}
           REPLACE3: ${{ toJSON(steps.replace3.outputs.replaced) }}
           REPLACE4: ${{ toJSON(steps.replace4.outputs.replaced) }}
+          REPLACE5: ${{ toJSON(steps.replace5.outputs.replaced) }}
         run: |
           echo "1: $REPLACE1"
           echo "2: $REPLACE2"
           echo "3: $REPLACE3"
           echo "3: $REPLACE4"
+          echo "3: $REPLACE5"
