@@ -1,3 +1,3 @@
 @echo off
-echo Starting Python 3 web server
+echo Starting web server...
 python3 -m http.server 9195
