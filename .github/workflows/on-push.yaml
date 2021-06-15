@@ -1,5 +1,6 @@
 name: On Push
 
+# Should only trigger in case of pushes to the upstream repo, not forks
 on: push
 
 jobs:
