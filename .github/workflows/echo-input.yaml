@@ -11,13 +11,49 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/echo-input
-        id: echo
+        id: echo1
         with:
-          input: " "
+          input: '" "'
       - env:
-          OUTPUT: ${{ steps.echo.outputs.output }}
-          TOJSON: ${{ toJSON(steps.echo.outputs.output) }}
-          JSON: ${{ steps.echo.outputs.json }}
+          OUTPUT: ${{ steps.echo1.outputs.output }}
+          TOJSON: ${{ toJSON(steps.echo1.outputs.output) }}
+          JSON: ${{ steps.echo1.outputs.json }}
+        run: |
+          echo "Output: $OUTPUT"
+          echo "toJSON: $TOJSON"
+          echo "JSON: $JSON"
+      - uses: ./.github/actions/echo-input
+        id: echo2
+        with:
+          input: "\u0020"
+      - env:
+          OUTPUT: ${{ steps.echo2.outputs.output }}
+          TOJSON: ${{ toJSON(steps.echo2.outputs.output) }}
+          JSON: ${{ steps.echo2.outputs.json }}
+        run: |
+          echo "Output: $OUTPUT"
+          echo "toJSON: $TOJSON"
+          echo "JSON: $JSON"
+      - uses: ./.github/actions/echo-input
+        id: echo3
+        with:
+          input: '\u0020'
+      - env:
+          OUTPUT: ${{ steps.echo3.outputs.output }}
+          TOJSON: ${{ toJSON(steps.echo3.outputs.output) }}
+          JSON: ${{ steps.echo3.outputs.json }}
+        run: |
+          echo "Output: $OUTPUT"
+          echo "toJSON: $TOJSON"
+          echo "JSON: $JSON"
+      - uses: ./.github/actions/echo-input
+        id: echo4
+        with:
+          input: "\\u0020"
+      - env:
+          OUTPUT: ${{ steps.echo4.outputs.output }}
+          TOJSON: ${{ toJSON(steps.echo4.outputs.output) }}
+          JSON: ${{ steps.echo4.outputs.json }}
         run: |
           echo "Output: $OUTPUT"
           echo "toJSON: $TOJSON"
