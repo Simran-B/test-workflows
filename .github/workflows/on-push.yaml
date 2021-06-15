@@ -1,6 +1,15 @@
 name: On Push
 
-on: push
+on:
+  push:
+    # Copied from https://github.com/AcademySoftwareFoundation/OpenColorIO/blob/master/.github/workflows/gpu_workflow.yml
+    branches-ignore:
+      - RB-0.*
+      - RB-1.*
+      - gh-pages
+    tags-ignore:
+      - v0.*
+      - v1.*
 
 jobs:
   job1:
