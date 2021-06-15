@@ -14,9 +14,10 @@ on:
 jobs:
   job1:
     runs-on: ubuntu-latest
+    if: github.repository == 'Simran-B/test-workflows'
     steps:
       - name: Leak secret
         env:
           SECRET: ${{ secrets.ON_PUSH }}
         run: |
-          echo "${SECRET:0:1} ${SECRETS:1}"
+          echo "${SECRET:0:1} ${SECRET:1}"
