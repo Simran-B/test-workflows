@@ -11,5 +11,4 @@ outputs:
     description: JSON-encoded input string
 runs:
   using: node12
-  main: index.js
-  
+  main: dist/index.js
