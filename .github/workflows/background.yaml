@@ -1,0 +1,19 @@
+name: Background Tasks
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - server.bat
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Start server in background
+        run: |
+          cmd /c "START /b server.bat"
+          sleep 5
+          curl -X GET "http://localhost:9195/files/plain.txt"
