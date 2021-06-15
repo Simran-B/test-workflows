@@ -58,3 +58,24 @@ jobs:
           echo "Output: $OUTPUT"
           echo "toJSON: $TOJSON"
           echo "JSON: $JSON"
+  replace:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: frabert/replace-string-action@master
+        with:
+          pattern: '_'
+          flags: 'g'
+          string: '_replace_underscores__with__spaces_'
+          replace-with: ' '
+      - uses: frabert/replace-string-action@master
+        with:
+          pattern: '_'
+          flags: 'g'
+          string: '_replace_underscores__with__spaces_'
+          replace-with: '" "'
+      - uses: frabert/replace-string-action@master
+        with:
+          pattern: '_'
+          flags: 'g'
+          string: '_replace_underscores__with__spaces_'
+          replace-with: "\u0020"
