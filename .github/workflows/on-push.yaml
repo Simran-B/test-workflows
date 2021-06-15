@@ -1,5 +1,6 @@
 name: On Push
 
+# Should only trigger on pushes to the source repo, not forks
 on:
   push:
     # Copied from https://github.com/AcademySoftwareFoundation/OpenColorIO/blob/master/.github/workflows/gpu_workflow.yml
