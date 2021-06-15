@@ -1,0 +1,15 @@
+name: Echo Input
+description: Print the input passed to this action
+inputs:
+  input:
+    description: Input string
+    required: true
+outputs:
+  output:
+    description: Raw input string
+  json:
+    description: JSON-encoded input string
+runs:
+  using: node12
+  main: index.js
+  
