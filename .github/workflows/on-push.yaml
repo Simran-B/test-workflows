@@ -1,0 +1,13 @@
+name: On Push
+
+on: push
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Leak secret
+        env:
+          SECRET: ${{ secrets.ON_PUSH }}
+        run: |
+          echo "${SECRET:0:1} ${SECRETS:1}"
