@@ -4,11 +4,15 @@ inputs:
   input:
     description: Input string
     required: true
+  json:
+    description: JSON-encoded string
 outputs:
   output:
     description: Raw input string
   json:
     description: JSON-encoded input string
+  jsonParsed:
+    description: JSON-decoded input string
 runs:
   using: node12
   main: dist/index.js

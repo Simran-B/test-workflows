@@ -549,7 +549,9 @@ try {
     console.log(`Got json: '${json}'`)
     core.setOutput("output", input)
     core.setOutput("json", JSON.stringify(input))
-    core.setOutput("parsedJson", JSON.parse(json))
+    if (json) {
+        core.setOutput("parsedJson", JSON.parse(json))
+    }
 } catch (error) {
     core.setFailed(error.message)
 }

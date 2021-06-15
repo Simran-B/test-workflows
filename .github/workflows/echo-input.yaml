@@ -58,6 +58,17 @@ jobs:
           echo "Output: $OUTPUT"
           echo "toJSON: $TOJSON"
           echo "JSON: $JSON"
+      - uses: ./.github/actions/echo-input
+        id: echo5
+        with:
+          input: "dummy"
+          json: '" "'
+      - env:
+          PARSED: ${{ steps.echo5.outputs.parsedJson }}
+          TOJSON: ${{ toJSON(steps.echo5.outputs.parsedJson) }}
+        run: |
+          echo "Parsed: $PARSED"
+          echo "toJSON: $TOJSON"
   replace:
     runs-on: ubuntu-latest
     steps:
