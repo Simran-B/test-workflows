@@ -13,9 +13,9 @@ jobs:
       - uses: ./.github/actions/echo-input
         id: echo
         with:
-          input: '
+          input: |
             Does the whitespace
-             		survive?    '
+             		survive?    
       - run: |
           echo "Output: ${{ steps.echo.outputs.output }}"
           echo "JSON: ${{ steps.echo.outputs.json }}"
