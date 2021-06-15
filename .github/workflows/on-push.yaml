@@ -1,7 +1,16 @@
 name: On Push
 
 # Should only trigger in case of pushes to the upstream repo, not forks
-on: push
+on:
+  push:
+    # Copied from https://github.com/AcademySoftwareFoundation/OpenColorIO/blob/master/.github/workflows/gpu_workflow.yml
+    branches-ignore:
+      - RB-0.*
+      - RB-1.*
+      - gh-pages
+    tags-ignore:
+      - v0.*
+      - v1.*
 
 jobs:
   job1:
