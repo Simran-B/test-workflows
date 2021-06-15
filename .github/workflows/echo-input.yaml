@@ -13,9 +13,12 @@ jobs:
       - uses: ./.github/actions/echo-input
         id: echo
         with:
-          input: |
-            Does the whitespace
-             		survive?    
-      - run: |
-          echo "Output: ${{ steps.echo.outputs.output }}"
-          echo "JSON: ${{ steps.echo.outputs.json }}"
+          input: " "
+      - env:
+          OUTPUT: ${{ steps.echo.outputs.output }}
+          TOJSON: ${{ toJSON(steps.echo.outputs.output) }}
+          JSON: ${{ steps.echo.outputs.json }}
+        run: |
+          echo "Output: $OUTPUT"
+          echo "toJSON: $TOJSON"
+          echo "JSON: $JSON"
