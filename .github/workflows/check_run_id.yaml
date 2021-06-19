@@ -1,0 +1,46 @@
+name: Get check_run_id
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        wait: [5, 8]
+    steps:
+      - name: Fake build process
+        run: |
+          sleep ${{ matrix.wait }}
+  post-build:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v4
+        id: query-jobs
+        with:
+          script: |
+            const jobs = await github.rest.actions.listJobsForWorkflowRun({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: ${{ github.run_id }},
+            });
+            console.log(jobs);
+      - name: Print fetched jobs
+        env:
+          JOBS: ${{ steps.query-job.outputs.result }}
+        run: |
+          echo "$JOBS"
+      - uses: actions/github-script@v4
+        id: last-job
+        with:
+          script: |
+            const jobs = await github.rest.actions.listJobsForWorkflowRun({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: ${{ github.run_id }},
+            });
+            console.log(jobs[jobs.length-1].id); // not fail-safe
+          result-encoding: string
+      - run: |
+          echo "${{ format('{0}/checks?check_run_id={1}', github.event.pull_request._links.html.href, steps.last-job.outputs.result) }}"
