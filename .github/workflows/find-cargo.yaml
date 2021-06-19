@@ -1,0 +1,14 @@
+name: Find Cargo
+
+on: workflow_dispatch
+  
+jobs:
+  find:
+    runs-on: windows-latest
+    steps:
+      - name: Try to locate cargo command from Rust tools
+        run: |
+          where.exe cargo
+          echo $Env:CARGO
+          echo $Env:CARGO_HOME
+          Get-ChildItem -Path C:\ -Filter cargo.exe -Recurse -ErrorAction SilentlyContinue -Force
