@@ -20,7 +20,7 @@ jobs:
         id: query-jobs
         with:
           script: |
-            const jobs = await github.rest.actions.listJobsForWorkflowRun({
+            const jobs = await github.actions.listJobsForWorkflowRun({
               owner: context.repo.owner,
               repo: context.repo.repo,
               run_id: ${{ github.run_id }},
@@ -35,7 +35,7 @@ jobs:
         id: last-job
         with:
           script: |
-            const jobs = await github.rest.actions.listJobsForWorkflowRun({
+            const jobs = await github.actions.listJobsForWorkflowRun({
               owner: context.repo.owner,
               repo: context.repo.repo,
               run_id: ${{ github.run_id }},
