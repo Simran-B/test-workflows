@@ -25,10 +25,10 @@ jobs:
               repo: context.repo.repo,
               run_id: ${{ github.run_id }},
             });
-            console.log(data);
+            console.log(data.jobs);
       - name: Print fetched jobs
         env:
-          JOBS_DATA: ${{ steps.query-job.outputs.result }}
+          JOBS_DATA: ${{ steps.query-jobs.outputs.result }}
         run: |
           echo "$JOBS_DATA"
       - uses: actions/github-script@v4
