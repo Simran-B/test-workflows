@@ -20,27 +20,27 @@ jobs:
         id: query-jobs
         with:
           script: |
-            const jobs = await github.actions.listJobsForWorkflowRun({
+            const data = await github.actions.listJobsForWorkflowRun({
               owner: context.repo.owner,
               repo: context.repo.repo,
               run_id: ${{ github.run_id }},
             });
-            console.log(jobs);
+            console.log(data);
       - name: Print fetched jobs
         env:
-          JOBS: ${{ steps.query-job.outputs.result }}
+          JOBS_DATA: ${{ steps.query-job.outputs.result }}
         run: |
-          echo "$JOBS"
+          echo "$JOBS_DATA"
       - uses: actions/github-script@v4
         id: last-job
         with:
           script: |
-            const jobs = await github.actions.listJobsForWorkflowRun({
+            const data = await github.actions.listJobsForWorkflowRun({
               owner: context.repo.owner,
               repo: context.repo.repo,
               run_id: ${{ github.run_id }},
             });
-            console.log(jobs[jobs.length-1].id); // not fail-safe
+            console.log(data.jobs[data.jobs.length-1].id); // not fail-safe
           result-encoding: string
       - run: |
           echo "${{ format('{0}/checks?check_run_id={1}', github.event.pull_request._links.html.href, steps.last-job.outputs.result) }}"
