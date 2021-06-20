@@ -1,0 +1,22 @@
+name: Dynamic Environment
+
+on: push
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    outputs:
+      myenv: ${{ steps.determine-env.outputs.myenv }}
+    steps:
+      - name: Determine Environment
+        id: determine-env
+        run: |
+          echo "::set-output name=myenv::staging"
+  job2:
+    runs-on: ubuntu-latest
+    needs: job1
+    environment: ${{ needs.job1.outputs.myenv }}
+    steps:
+      - name: Print Environment
+        run: |
+          echo "myenv = ${{ needs.job1.outputs.myenv }}"
