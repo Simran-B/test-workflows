@@ -12,10 +12,24 @@ jobs:
       - name: windows-dependencies
         run: |
           $generator= "-DCMAKE_GENERATOR_PLATFORM=x64"
+          $foo= "bar"
           echo "Generator: ${generator}"
+          echo "foo: ${foo}"
           echo "GENERATOR_PLATFORM=$generator" >> $GITHUB_ENV
+          echo "OTHER_NAME=$foo" >> $GITHUB_ENV
 
-      - name: Configure CMake
+      - name: Bash
         shell: bash
         run: |
-          echo $GITHUB_WORKSPACE $GENERATOR_PLATFORM
+          echo "env.GENERATOR_PLATFORM = ${{ env.GENERATOR_PLATFORM }}"
+          echo "env.OTHER_NAME = ${{ env.OTHER_NAME }}"
+          echo "GENERATOR_PLATFORM = $GENERATOR_PLATFORM"
+          echo "OTHER_NAME = $OTHER_NAME"
+
+      - name: PowerShell
+        shell: pwsh
+        run: |
+          echo "env.GENERATOR_PLATFORM = ${{ env.GENERATOR_PLATFORM }}"
+          echo "env.OTHER_NAME = ${{ env.OTHER_NAME }}"
+          echo "GENERATOR_PLATFORM = $Env:GENERATOR_PLATFORM"
+          echo "OTHER_NAME = $Env:OTHER_NAME"
