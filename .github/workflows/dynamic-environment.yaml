@@ -16,7 +16,7 @@ jobs:
   job2:
     runs-on: ubuntu-latest
     needs: job1
-    environment: ${{ needs.job1.outputs.myenv || null }}
+    environment: ${{ needs.job1.outputs.myenv || '' }}
     steps:
       - name: Print Environment
         run: |
