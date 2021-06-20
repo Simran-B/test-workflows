@@ -1,0 +1,21 @@
+name: Overwrite env
+
+on: workflow_dispatch
+
+jobs:
+  job1:
+    runs-on: windows-latest
+    env:
+      GENERATOR_PLATFORM: initial value
+
+    steps:
+      - name: windows-dependencies
+        run: |
+          $generator= "-DCMAKE_GENERATOR_PLATFORM=x64"
+          echo "Generator: ${generator}"
+          echo "GENERATOR_PLATFORM=$generator" >> $GITHUB_ENV
+
+      - name: Configure CMake
+        shell: bash
+        run: |
+          echo $GITHUB_WORKSPACE $GENERATOR_PLATFORM
