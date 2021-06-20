@@ -15,8 +15,8 @@ jobs:
           $foo= "bar"
           echo "Generator: ${generator}"
           echo "foo: ${foo}"
-          echo "GENERATOR_PLATFORM=$generator" >> $GITHUB_ENV
-          echo "OTHER_NAME=$foo" >> $GITHUB_ENV
+          echo "GENERATOR_PLATFORM=$generator" >> $Env:GITHUB_ENV
+          echo "OTHER_NAME=$foo" >> $Env:GITHUB_ENV
 
       - name: Bash
         shell: bash
