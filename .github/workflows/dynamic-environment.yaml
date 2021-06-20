@@ -11,7 +11,8 @@ jobs:
       - name: Determine Environment
         id: determine-env
         run: |
-          echo "::set-output name=myenv::staging"
+          #echo "::set-output name=myenv::staging"
+          echo "Not setting an environment"
   job2:
     runs-on: ubuntu-latest
     needs: job1
