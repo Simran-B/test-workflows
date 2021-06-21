@@ -1,0 +1,22 @@
+name: Homebrew
+on: workflow_dispatch
+jobs:
+  info:
+    strategy:
+      matrix:
+        os: [macos-macos-10.15, macos-11]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Homebrew version
+        run: |
+          brew --version
+  latest:
+    runs-on: macos-latest
+    steps:
+      # HACK: Don't use pre-installed Homebrew 3.0.10 from GitHub's virtual environment
+      # Newer versions download packages from GitHub instead of Bintray which is shutting down
+      - name: Set up Homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+      - name: Latest Homebrew version
+        run: |
+          brew --version
