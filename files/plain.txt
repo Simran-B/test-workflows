@@ -1,2 +1,2 @@
 Hello from a plain-text file!
-Labeling test 1
+Labeling test 1.
