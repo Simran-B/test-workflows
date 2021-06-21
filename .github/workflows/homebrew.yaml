@@ -3,6 +3,7 @@ on: workflow_dispatch
 jobs:
   info:
     strategy:
+      fail-fast: false
       matrix:
         os:
           - macos-10.15
