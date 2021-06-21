@@ -1,0 +1,17 @@
+name: Labeling
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check commit messages
+        env:
+          COMMIT_MSGS: ${{ github.event.commits.*.message }}
+        run: |
+          echo "$COMMIT_MSGS"
+        
