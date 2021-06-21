@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Check commit messages
         env:
-          COMMIT_MSGS: ${{ github.event.commits.*.message }}
+          COMMIT_MSGS: ${{ toJSON(github.event.commits.*.message) }}
         run: |
           echo "$COMMIT_MSGS"
         
