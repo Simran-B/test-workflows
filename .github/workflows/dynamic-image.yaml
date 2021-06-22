@@ -6,6 +6,7 @@ on:
       docker-image:
         description: Docker Hub image
         required: true
+        default: 'centos:7'
 
 env:
   IMAGE: 'centos:8'
@@ -17,7 +18,7 @@ jobs:
       image: ${{ github.event.inputs.docker-image }}
     steps:
       - name: Print Linux OS info
-        run: cat /etc/lsb-release
+        run: cat /etc/centos-release
   set-output:
     runs-on: ubuntu-latest
     outputs:
@@ -35,4 +36,4 @@ jobs:
       image: ${{ needs.set-output.outputs.image }}
     steps:
       - name: Print Linux OS info
-        run: cat /etc/lsb-release
+        run: cat /etc/alpine-release
