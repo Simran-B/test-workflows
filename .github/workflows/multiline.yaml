@@ -1,0 +1,43 @@
+name: Multi-line
+
+on: workflow_dispatch
+
+jobs:
+  output:
+    runs-on: ubuntu-latest
+    env:
+      MULTILINE: |
+        This is a block of content
+        that goes over multiple lines with commands $(date).
+
+        Can 'this' be set as "output"?
+    steps:
+      - name: Set outputs and env
+        id: set
+        run: |
+          echo "::set-output name=plain-env::$MULTILINE"
+          echo "::set-output name=plain-expr::${{ env.MULTILINE }}"
+          ESCAPED="${MULTILINE//'%'/'%25'}"
+          ESCAPED="${MULTILINE//$'\r'/'%0A'}"
+          ESCAPED="${MULTILINE//$'\n'/'%0D'}"
+          echo "::set-output name=escaped::$ESCAPED"
+          cat <<'EOF'
+          ::set-output name=cat-literal::An inline block
+          of text over multiple lines.
+          
+          Does it work, with `code`?
+          EOF
+          echo 'VIA_ENV<<EOF' >> $GITHUB_ENV
+          echo '`date`' >> $GITHUB_ENV
+          echo 'Another line...' >> $GITHUB_ENV
+          cat <<EOF >> $GITHUB_ENV
+          Another block, but with substituation enabled:
+          $(date)
+          EOF
+          echo 'EOF' >> $GITHUB_ENV
+      - name: Print outputs and env
+        env:
+          OUTPUTS: ${{ toJSON(steps.set.outputs) }}
+        run: |
+          echo "$OUTPUTS"
+          echo "$VIA_ENV"
