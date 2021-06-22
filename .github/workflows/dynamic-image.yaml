@@ -1,0 +1,46 @@
+name: Context
+
+on:
+  workflow_dispatch:
+    inputs:
+      docker-image:
+        description: Docker Hub image
+        required: true
+
+env:
+  IMAGE: 'centos:8'
+
+jobs:
+  dispatch-input:
+    runs-on: ubuntu-latest
+    container:
+      image: ${{ github.event.inputs.docker-image }}
+    steps:
+      - name: Print Linux OS info
+        run: cat /etc/lsb-release
+  env-context:
+    runs-on: ubuntu-latest
+    container:
+      image: ${{ env.IMAGE }} # env context only available at step level!
+    continue-on-error: true
+    steps:
+      - name: Print Linux OS info
+        run: cat /etc/lsb-release
+  set-output:
+    runs-on: ubuntu-latest
+    outputs:
+      image: ${{ steps.set.outputs.image }}
+    steps:
+      - name: Set output
+        id: set
+        run: |
+          name="Alpine"
+          echo "::set-output name=image::${name,,}" # uppercase would be ^^ instead of ,,
+  use-output:
+    runs-on: ubuntu-latest
+    needs: set-output
+    container:
+      image: ${{ needs.set-output.outputs.image }}
+    steps:
+      - name: Print Linux OS info
+        run: cat /etc/lsb-release
