@@ -21,6 +21,8 @@ jobs:
           cat 'C:\Windows\System32\drivers\etc\hosts'
           ipconfig /flushdns
           nbtstat -R
+          net stop dnscache
+          net start dnscache
       - name: Start server in background
         run: |
           cmd /c "START /b server.bat"
