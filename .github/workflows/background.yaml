@@ -14,13 +14,17 @@ jobs:
       - uses: actions/checkout@v2
       - name: Modify hosts
         run: |
+          echo 'Before --------------------------------------------------------------------------'
           cat 'C:\Windows\System32\drivers\etc\hosts'
           echo '127.0.0.1 microsoft.com' >> 'C:\Windows\System32\drivers\etc\hosts'
+          echo 'After ---------------------------------------------------------------------------'
           cat 'C:\Windows\System32\drivers\etc\hosts'
+          ipconfig /flushdns
       - name: Start server in background
         run: |
           cmd /c "START /b server.bat"
           # Need to sleep for a bit here so that the Python server can boostrap
           sleep 3
           curl -sS "http://localhost:9195/files/plain.txt"
+          curl -sS "http://127.0.0.1:9195/files/plain.txt"
           curl "http://microsoft.com:9195/files/plain.txt"
