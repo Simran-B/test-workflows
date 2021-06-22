@@ -12,9 +12,15 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Modify hosts
+        run: |
+          cat 'C:\Windows\System32\drivers\etc\hosts'
+          echo '127.0.0.1 microsoft.com' >> 'C:\Windows\System32\drivers\etc\hosts'
+          cat 'C:\Windows\System32\drivers\etc\hosts'
       - name: Start server in background
         run: |
           cmd /c "START /b server.bat"
           # Need to sleep for a bit here so that the Python server can boostrap
-          sleep 2
-          curl -X GET "http://localhost:9195/files/plain.txt"
+          sleep 3
+          curl -sS "http://localhost:9195/files/plain.txt"
+          curl "http://microsoft.com:9195/files/plain.txt"
