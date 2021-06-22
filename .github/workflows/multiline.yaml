@@ -18,8 +18,8 @@ jobs:
           echo "::set-output name=plain-env::$MULTILINE"
           echo "::set-output name=plain-expr::${{ env.MULTILINE }}"
           ESCAPED="${MULTILINE//'%'/'%25'}"
-          ESCAPED="${MULTILINE//$'\r'/'%0A'}"
-          ESCAPED="${MULTILINE//$'\n'/'%0D'}"
+          ESCAPED="${MULTILINE//$'\n'/'%0A'}"
+          ESCAPED="${MULTILINE//$'\r'/'%0D'}"
           echo "::set-output name=escaped::$ESCAPED"
           cat <<'EOF'
           ::set-output name=cat-literal::An inline block
@@ -39,5 +39,7 @@ jobs:
         env:
           OUTPUTS: ${{ toJSON(steps.set.outputs) }}
         run: |
+          echo "Outputs:"
           echo "$OUTPUTS"
+          echo "Env var:"
           echo "$VIA_ENV"
