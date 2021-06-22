@@ -18,14 +18,6 @@ jobs:
     steps:
       - name: Print Linux OS info
         run: cat /etc/lsb-release
-  env-context:
-    runs-on: ubuntu-latest
-    container:
-      image: ${{ env.IMAGE }} # env context only available at step level!
-    continue-on-error: true
-    steps:
-      - name: Print Linux OS info
-        run: cat /etc/lsb-release
   set-output:
     runs-on: ubuntu-latest
     outputs:
