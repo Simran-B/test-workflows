@@ -69,6 +69,25 @@ jobs:
         run: |
           echo "Parsed: $PARSED"
           echo "toJSON: $TOJSON"
+      - uses: ./.github/actions/echo-input
+        id: echo6
+        with:
+          input: |2
+
+                 Multiline text
+            with indentation indicator
+
+            		tabs!		
+      - env:
+          OUTPUT: ${{ steps.echo6.outputs.output }}
+          OUTPUT_RAW: ${{ steps.echo6.outputs.outputRaw }}
+          TOJSON: ${{ toJSON(steps.echo6.outputs.output) }}
+          TOJSON_RAW: ${{ toJSON(steps.echo6.outputs.outputRaw) }}
+        run: |
+          echo "Output: $OUTPUT"
+          echo "Output Raw: $OUTPUT_RAW"
+          echo "toJSON: $TOJSON"
+          echo "toJSON Raw: $TOJSON_RAW"
   replace:
     runs-on: ubuntu-latest
     steps:

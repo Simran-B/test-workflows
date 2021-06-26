@@ -8,6 +8,8 @@ inputs:
     description: JSON-encoded string
 outputs:
   output:
+    description: The input string
+  outputRaw:
     description: Raw input string
   json:
     description: JSON-encoded input string
