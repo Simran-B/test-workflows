@@ -56,7 +56,7 @@ body:
         - RAM size per machine, e.g. 32 GB
         - Storage type, e.g. local SSD or HDD NAS
   - type: textarea
-    attriutes:
+    attributes:
       label: Configuration
       description: |
         Notable server settings, cluster setup details (replication factors,
