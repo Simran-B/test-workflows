@@ -1,0 +1,9 @@
+name: Feature
+description: >
+  A code contribution to ArangoDB's core
+body:
+  - type: input
+    attributes:
+      label: Summary
+    validations:
+      required: true
