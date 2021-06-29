@@ -3,12 +3,12 @@ description: Suggest an improvement or enhancement
 labels:
   - 1 Feature
 body:
-  type: textarea
-  attributes:
-    label: Description
-    description: |
-      - Describe your suggestion in detail
-      - Include usage examples to show how it would work
-      - Indicate the component or tool your request is for, e.g. Web UI, AQL, arangoimport, etc.
-  validations:
-    required: true
+  - type: textarea
+    attributes:
+      label: Description
+      description: |
+        - Describe your suggestion in detail
+        - Include usage examples to show how it would work
+        - Indicate the component or tool your request is for, e.g. Web UI, AQL, arangoimport, etc.
+    validations:
+      required: true
