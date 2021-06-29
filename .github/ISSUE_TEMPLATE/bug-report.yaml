@@ -71,7 +71,6 @@ body:
       description: >
         - Indicate the component or client library, e.g. Web UI, Foxx,
           official Java driver, etc.
-
         - The problematic request or query, e.g. an AQL query with explain
           and/or profiling output (`db._explain("<query">)` /
           `db._profileQuery("<query>")` in arangosh). Please wrap each output
@@ -79,16 +78,10 @@ body:
   - type: textarea
     attributes:
       label: Data
-      description: >-
-        - Describe or share an example dataset that can be used to reproduce
-          the problem (can be a [Gist](https://gist.github.com/) with an
-          arangodump, an arangosh script with `db.collection.save({ ... });`
-          statements, or other).
-
+      description: |
+        - Describe or share an example dataset that can be used to reproduce the problem (can be a [Gist](https://gist.github.com/) with an arangodump, an arangosh script with `db.collection.save({ ... });` statements, or other).
         - Include the number of documents and the size of the data on disk.
-
-        - List what indexes are present and other information as relevant
-          (e.g. Views configuration)
+        - List what indexes are present and other information as relevant (e.g. Views configuration)
   - type: textarea
     attributes:
       label: Steps to reproduce
