@@ -1,5 +1,8 @@
 blank_issues_enabled: true
 contact_links:
   - name: StackOverflow
-    about: Find answers and ask questions tagged with `arangodb`
+    about: Find answers and ask questions tagged with 'arangodb'
     url: https://stackoverflow.com/questions/tagged/arangodb
+  - name: Slack
+    about: Join the community chat
+    url: https://slack.arangodb.com/
