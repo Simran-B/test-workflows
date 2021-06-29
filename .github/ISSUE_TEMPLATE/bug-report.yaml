@@ -10,6 +10,7 @@ body:
       value: |
         ## Environment
   - type: input
+    id: version
     attributes:
       label: ArangoDB Version
       description: >
@@ -21,6 +22,7 @@ body:
     validations:
       required: true
   - type: dropdown
+    id: engine
     attributes:
       label: Storage Engine # We can drop this once v3.6 is EoL
       description: >
@@ -32,6 +34,7 @@ body:
     validations:
       required: true
   - type: dropdown
+    id: deployment_mode
     attributes:
       label: Deployment Mode
       options:
@@ -43,6 +46,7 @@ body:
     validations:
       required: true
   - type: input
+    id: package
     attributes:
       label: Used Package
       placeholder: |
