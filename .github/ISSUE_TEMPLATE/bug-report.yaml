@@ -23,7 +23,7 @@ body:
   - type: dropdown
     attributes:
       label: Storage Engine # We can drop this once v3.6 is EoL
-      description: |
+      description: >
         RocksDB is the default since ArangoDB v3.4 and the only available
         storage engine since v3.7.
       options:
@@ -58,7 +58,7 @@ body:
   - type: textarea
     attributes:
       label: Configuration
-      description: |
+      description: >
         Notable server settings, cluster setup details (replication factors,
         numbers of shards), etc.
   - type: markdown
@@ -68,9 +68,10 @@ body:
   - type: textarea
     attributes:
       label: Affected feature and operation
-      description: |
+      description: >
         - Indicate the component or client library, e.g. Web UI, Foxx,
           official Java driver, etc.
+
         - The problematic request or query, e.g. an AQL query with explain
           and/or profiling output (`db._explain("<query">)` /
           `db._profileQuery("<query>")` in arangosh). Please wrap each output
@@ -78,18 +79,20 @@ body:
   - type: textarea
     attributes:
       label: Data
-      description: |
+      description: >
         - Describe or share an example dataset that can be used to reproduce
           the problem (can be a [Gist](https://gist.github.com/) with an
           arangodump, an arangosh script with `db.collection.save({ ... });`
           statements, or other).
+
         - Include the number of documents and the size of the data on disk.
+
         - List what indexes are present and other information as relevant
           (e.g. Views configuration)
   - type: textarea
     attributes:
       label: Steps to reproduce
-      description: |
+      description: >
         Describe how the problem can be replicated, what the expected result
         is, and what the actual result is.
       value: |-
