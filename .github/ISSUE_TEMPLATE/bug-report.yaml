@@ -79,7 +79,7 @@ body:
   - type: textarea
     attributes:
       label: Data
-      description: >
+      description: >-
         - Describe or share an example dataset that can be used to reproduce
           the problem (can be a [Gist](https://gist.github.com/) with an
           arangodump, an arangosh script with `db.collection.save({ ... });`
