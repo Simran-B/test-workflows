@@ -68,13 +68,9 @@ body:
   - type: textarea
     attributes:
       label: Affected feature and operation
-      description: >
-        - Indicate the component or client library, e.g. Web UI, Foxx,
-          official Java driver, etc.
-        - The problematic request or query, e.g. an AQL query with explain
-          and/or profiling output (`db._explain("<query">)` /
-          `db._profileQuery("<query>")` in arangosh). Please wrap each output
-          in triple backticks `` ``` ``.
+      description: |
+        - Indicate the component or client library, e.g. Web UI, Foxx, official Java driver, etc.
+        - The problematic request or query, e.g. an AQL query with explain and/or profiling output (`db._explain("<query">);` / `db._profileQuery("<query>");` in arangosh). Please wrap each output in triple backticks `` ``` ``.
   - type: textarea
     attributes:
       label: Data
