@@ -1,0 +1,100 @@
+name: Bug Report
+description: >
+  File an issue about a crash, error, or other kind of problem
+  originating from ArangoDB
+labels:
+  - 1 Bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Environment
+  - type: input
+    attributes:
+      label: ArangoDB Version
+      description: |
+        Note that ArangoDB v3.5 and older are
+        [no longer supported](https://www.arangodb.com/subscriptions/end-of-life-notice/).
+
+        If you use self-compiled binaries then enter the commit hash here.
+      placeholder: e.g. 3.7.12
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: Storage Engine # We can drop this once v3.6 is EoL
+      description: |
+        RocksDB is the default since ArangoDB v3.4 and the only available
+        storage engine since v3.7.
+      options:
+        - RocksDB
+        - MMFiles
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: Deployment Mode
+      options:
+        - Single Server
+        - Active Failover
+        - Cluster
+        - DC2DC
+        - Leader/Follower (formerly "Master/Slave")
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Used Package
+      placeholder: |
+        e.g. official Docker image / .deb / .rpm / Windows installer / ...
+  - type: textarea
+    attributes:
+      label: Infrastructure
+      description: |
+        The hardware you run ArangoDB on:
+        - Cloud provider and service (if applicable), e.g. AWS EKS
+        - RAM size per machine, e.g. 32 GB
+        - Storage type, e.g. local SSD or HDD NAS
+  - type: textarea
+    attriutes:
+      label: Configuration
+      description: |
+        Notable server settings, cluster setup details (replication factors,
+        numbers of shards), etc.
+  - type: markdown
+    attributes:
+      value: |
+        ## Problem Description
+  - type: textarea
+    attributes:
+      label: Affected feature and operation
+      description: |
+        - Indicate the component or client library, e.g. Web UI, Foxx,
+          official Java driver, etc.
+        - The problematic request or query, e.g. an AQL query with explain
+          and/or profiling output (`db._explain("<query">)` /
+          `db._profileQuery("<query>")` in arangosh). Please wrap each output
+          in triple backticks `` ``` ``.
+  - type: textarea
+    attributes:
+      label: Data
+      description: |
+        - Describe or share an example dataset that can be used to reproduce
+          the problem (can be a [Gist](https://gist.github.com/) with an
+          arangodump, an arangosh script with `db.collection.save({ ... });`
+          statements, or other).
+        - Include the number of documents and the size of the data on disk.
+        - List what indexes are present and other information as relevant
+          (e.g. Views configuration)
+  - type: textarea
+    attributes:
+      label: Steps to reproduce
+      description: |
+        Describe how the problem can be replicated, what the expected result
+        is, and what the actual result is.
+      value: |-
+        1. 
+        2. 
+        3. 
+    validations:
+      required: true
