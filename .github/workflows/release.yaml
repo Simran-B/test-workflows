@@ -1,0 +1,15 @@
+name: Release Publication
+
+on:
+  release:
+    types: [published]
+    
+jobs:
+  job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Event context
+        env:
+          EVENT: ${{ github.event }}
+        run: |
+          echo "$EVENT"
