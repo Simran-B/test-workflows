@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        wait: [2, 3]
+        wait: [1, 2]
     steps:
       - name: Fake build process
         run: |
@@ -25,12 +25,16 @@ jobs:
               repo: context.repo.repo,
               run_id: ${{ github.run_id }},
             });
-            console.log(`status: ${ data.status }`);
-            return data.jobs
+            console.log(data);
+            return data
       - name: Print fetched jobs
         env:
           JOBS_DATA: ${{ steps.query-jobs.outputs.result }}
+          JOBS_JSON: ${{ toJSON(steps.query-jobs.outputs.result) }}
         run: |
+          echo "data:"
           echo "$JOBS_DATA"
+          echo "as JSON:"
+          echo "$JOBS_JSON"
       - run: |
           #echo "${{ format('{0}/checks?check_run_id={1}', github.event.pull_request._links.html.href, steps.query-jobs.outputs.result) }}"
