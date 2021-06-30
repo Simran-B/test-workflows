@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        wait: [5, 8]
+        wait: [2, 3]
     steps:
       - name: Fake build process
         run: |
@@ -25,23 +25,12 @@ jobs:
               repo: context.repo.repo,
               run_id: ${{ github.run_id }},
             });
-            console.log(JSON.parse(data).jobs);
+            console.log(`status: ${ data.status }`);
+            return data.jobs
       - name: Print fetched jobs
         env:
           JOBS_DATA: ${{ steps.query-jobs.outputs.result }}
         run: |
           echo "$JOBS_DATA"
-      - uses: actions/github-script@v4
-        id: last-job
-        with:
-          script: |
-            const data = await github.actions.listJobsForWorkflowRun({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              run_id: ${{ github.run_id }},
-            });
-            const json = JSON.parse(data);
-            console.log(json.jobs[json.jobs.length-1].id); // not fail-safe
-          result-encoding: string
       - run: |
-          echo "${{ format('{0}/checks?check_run_id={1}', github.event.pull_request._links.html.href, steps.last-job.outputs.result) }}"
+          #echo "${{ format('{0}/checks?check_run_id={1}', github.event.pull_request._links.html.href, steps.query-jobs.outputs.result) }}"
