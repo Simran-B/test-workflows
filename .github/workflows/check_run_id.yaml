@@ -1,6 +1,10 @@
 name: Get check_run_id
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
@@ -20,21 +24,15 @@ jobs:
         id: query-jobs
         with:
           script: |
-            const data = await github.actions.listJobsForWorkflowRun({
+            const result = await github.actions.listJobsForWorkflowRun({
               owner: context.repo.owner,
               repo: context.repo.repo,
               run_id: ${{ github.run_id }},
             });
-            console.log(data);
-            return data
+            console.log(result);
+            return result.data.jobs.map(job => `${{ github.event.pull_request._links.html.href }}/checks?check_run_id=${ job.id }`).join("\n");
       - name: Print fetched jobs
         env:
           JOBS_DATA: ${{ steps.query-jobs.outputs.result }}
-          JOBS_JSON: ${{ toJSON(steps.query-jobs.outputs.result) }}
         run: |
-          echo "data:"
           echo "$JOBS_DATA"
-          echo "as JSON:"
-          echo "$JOBS_JSON"
-      - run: |
-          #echo "${{ format('{0}/checks?check_run_id={1}', github.event.pull_request._links.html.href, steps.query-jobs.outputs.result) }}"
