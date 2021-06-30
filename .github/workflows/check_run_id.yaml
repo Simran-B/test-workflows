@@ -30,9 +30,12 @@ jobs:
               run_id: ${{ github.run_id }},
             });
             console.log(result);
-            return result.data.jobs.map(job => `${{ github.event.pull_request._links.html.href }}/checks?check_run_id=${ job.id }`).join("\n");
-      - name: Print fetched jobs
+            return result.data.jobs[result.data.jobs.length-1].id;
+      - name: Print fetched job ID
         env:
-          JOBS_DATA: ${{ steps.query-jobs.outputs.result }}
+          JOB_ID: ${{ steps.query-jobs.outputs.result }}
         run: |
-          echo "$JOBS_DATA"
+          echo "$JOB_ID"
+      - name: Print check link
+        run: |
+          echo '${{ format('{0}/checks?check_run_id={1}', github.event.pull_request._links.html.href, steps.query-jobs.outputs.result) }}'
