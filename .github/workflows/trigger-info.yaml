@@ -17,10 +17,10 @@ jobs:
       - name: Trigger
         env:
           GITHUB: ${{ toJSON(github) }}
-          PR: ${{ toJSON(!!github.event.issue.pull_request) }}
+          PR: ${{ toJSON(!!github.event.issue.pull_request || !!github.event.pull_request) }}
         run: |
           echo "on: ${{ github.event_name }}"
-          echo "type: ${{ github.event[github.event_name].action }}"
+          echo "type: ${{ github.event.action }}"
           echo "PR? $PR"
           echo "github: $GITHUB"
           cat "${{ github.event_path }}"
