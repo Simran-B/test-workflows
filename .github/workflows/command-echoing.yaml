@@ -1,0 +1,42 @@
+name: Command Echoing
+
+on:
+  workflow_dispatch:
+
+jobs:
+  job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: No echoing
+        run: |
+          cd ..
+          pwd
+          ls -lah
+          curl http://www.example.org | grep "illu"
+          echo "::set-output name=action_fruit::strawberry"
+          echo "::debug::Set the Octocat variable"
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+      - id: string
+        uses: ASzc/change-string-case-action@v1
+        with:
+          string: XyZzY
+      - id: step2
+        run: echo ${{ steps.string.outputs.lowercase }}
+
+      - name: Echoing on
+        run: |
+          echo "::echo::on"
+          cd ..
+          pwd
+          ls -lah
+          curl http://www.example.org | grep "illu"
+          echo "::set-output name=action_fruit::strawberry"
+          echo "::debug::Set the Octocat variable"
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+      - id: string
+        uses: ASzc/change-string-case-action@v1
+        with:
+          string: XyZzY
+      - id: step2
+        run: echo ${{ steps.string.outputs.lowercase }}
