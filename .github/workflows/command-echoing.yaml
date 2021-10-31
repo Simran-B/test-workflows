@@ -17,6 +17,9 @@ jobs:
           curl http://www.example.org | grep "illu"
           echo "::set-output name=action_fruit::strawberry"
           echo "::debug::Set the Octocat variable"
+          echo "::notice file=app.js,line=1,col=5,endColumn=7::Missing semicolon"
+          echo "::warning file=app.js,line=1,col=5,endColumn=7::Missing semicolon"
+          echo "::error file=app.js,line=1,col=5,endColumn=7::Missing semicolon"
           echo "$HOME/.local/bin" >> $GITHUB_PATH
           echo "::group::My title"
           echo "Inside group"
@@ -48,6 +51,9 @@ jobs:
           curl http://www.example.org | grep "illu"
           echo "::set-output name=action_fruit::apple"
           echo "::debug::Set the Octocat variable"
+          echo "::notice file=app.js,line=1,col=5,endColumn=7::Missing semicolon"
+          echo "::warning file=app.js,line=1,col=5,endColumn=7::Missing semicolon"
+          echo "::error file=app.js,line=1,col=5,endColumn=7::Missing semicolon"
           echo "$HOME/.local/bin" >> $GITHUB_PATH
           echo "::group::Another title"
           echo "Inside group"
