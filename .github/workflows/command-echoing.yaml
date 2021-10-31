@@ -17,12 +17,11 @@ jobs:
           echo "::set-output name=action_fruit::strawberry"
           echo "::debug::Set the Octocat variable"
           echo "$HOME/.local/bin" >> $GITHUB_PATH
-      - id: string
+      - id: string1
         uses: ASzc/change-string-case-action@v1
         with:
           string: XyZzY
-      - id: step2
-        run: echo ${{ steps.string.outputs.lowercase }}
+      - run: echo ${{ steps.string1.outputs.lowercase }}
 
       - name: Echoing on
         run: |
@@ -34,9 +33,8 @@ jobs:
           echo "::set-output name=action_fruit::strawberry"
           echo "::debug::Set the Octocat variable"
           echo "$HOME/.local/bin" >> $GITHUB_PATH
-      - id: string
+      - id: string2
         uses: ASzc/change-string-case-action@v1
         with:
           string: XyZzY
-      - id: step2
-        run: echo ${{ steps.string.outputs.lowercase }}
+      - run: echo ${{ steps.string2.outputs.lowercase }}
