@@ -25,6 +25,7 @@ jobs:
           echo "::stop-commands::start-commands"
           echo "::set-output name=action_vegetable::carrot"
           echo "::start-commands::"
+          echo "action_state=yellow" >> $GITHUB_ENV
           echo "::add-matcher::eslint-compact-problem-matcher.json"   
           echo "::remove-matcher owner=eslint-compact::"
       - id: string1
@@ -35,6 +36,7 @@ jobs:
           echo ${{ steps.string1.outputs.lowercase }}
           echo ${{ steps.no-echo.outputs.action_fruit }}
           echo ${{ steps.no-echo.outputs.action_vegetable }}
+          echo "$action_state"
 
       - name: Echoing on
         id: with-echo
@@ -54,6 +56,7 @@ jobs:
           echo "::stop-commands::start-commands"
           echo "::set-output name=action_vegetable::potato"
           echo "::start-commands::"
+          echo "action_state=green" >> $GITHUB_ENV
           echo "::add-matcher::eslint-compact-problem-matcher.json"   
           echo "::remove-matcher owner=eslint-compact::"
       - id: string2
@@ -65,3 +68,4 @@ jobs:
           echo ${{ steps.string2.outputs.lowercase }}
           echo ${{ steps.with-echo.outputs.action_fruit }}
           echo ${{ steps.with-echo.outputs.action_vegetable }}
+          echo "$action_state"
