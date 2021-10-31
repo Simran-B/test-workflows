@@ -9,6 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: No echoing
+        id: no-echo
         run: |
           cd ..
           pwd
@@ -17,24 +18,50 @@ jobs:
           echo "::set-output name=action_fruit::strawberry"
           echo "::debug::Set the Octocat variable"
           echo "$HOME/.local/bin" >> $GITHUB_PATH
+          echo "::group::My title"
+          echo "Inside group"
+          echo "::endgroup::"
+          echo "::add-mask::Mona The Octocat"
+          echo "::stop-commands::start-commands"
+          echo "::set-output name=action_vegetable::carrot"
+          echo "::start-commands::"
+          echo "::add-matcher::eslint-compact-problem-matcher.json"   
+          echo "::remove-matcher owner=eslint-compact::"
       - id: string1
         uses: ASzc/change-string-case-action@v1
         with:
           string: XyZzY
-      - run: echo ${{ steps.string1.outputs.lowercase }}
+      - run: |
+          echo ${{ steps.string1.outputs.lowercase }}
+          echo ${{ steps.no-echo.outputs.action_fruit }}
+          echo ${{ steps.no-echo.outputs.action_vegetable }}
 
       - name: Echoing on
+        id: with-echo
         run: |
           echo "::echo::on"
           cd ..
           pwd
           ls -lah
           curl http://www.example.org | grep "illu"
-          echo "::set-output name=action_fruit::strawberry"
+          echo "::set-output name=action_fruit::apple"
           echo "::debug::Set the Octocat variable"
           echo "$HOME/.local/bin" >> $GITHUB_PATH
+          echo "::group::Another title"
+          echo "Inside group"
+          echo "::endgroup::"
+          echo "::add-mask::Heinz Ketchup"
+          echo "::stop-commands::start-commands"
+          echo "::set-output name=action_vegetable::potato"
+          echo "::start-commands::"
+          echo "::add-matcher::eslint-compact-problem-matcher.json"   
+          echo "::remove-matcher owner=eslint-compact::"
       - id: string2
         uses: ASzc/change-string-case-action@v1
         with:
           string: XyZzY
-      - run: echo ${{ steps.string2.outputs.lowercase }}
+      - run: |
+          echo "::echo::on"
+          echo ${{ steps.string2.outputs.lowercase }}
+          echo ${{ steps.with-echo.outputs.action_fruit }}
+          echo ${{ steps.with-echo.outputs.action_vegetable }}
