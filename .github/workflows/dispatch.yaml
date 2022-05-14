@@ -28,6 +28,27 @@ on:
       testsToInclude2:
         description: "2nd set of Tests to include"
         required: false
+        type: choice
+        options:
+          - smoke-test
+          - regression-test
+          - authentication
+          - administration
+          - auditing
+          - call-details
+          - call-list
+          - calls
+          - comment-management
+          - comments
+          - continuous-monitoring
+          - dashboard
+          - call-activity
+          - phone-activity
+          - known-unknowns
+          - lexicons
+      testsToInclude3:
+        description: "3rd set of Tests to include"
+        required: false
         default: ""
         type: choice
         options:
@@ -51,11 +72,22 @@ on:
 env:
   TESTS_TO_INCLUDE_1: ${{ github.event.inputs.testsToInclude1 }}
   TESTS_TO_INCLUDE_2: ${{ github.event.inputs.testsToInclude2 }}
+  TESTS_TO_INCLUDE_3: ${{ github.event.inputs.testsToInclude3 }}
   
 jobs:
-  job:
+  job1:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "testsToInclude1 = ${{ env.testsToInclude1 }}"
-          echo "testsToInclude2 = ${{ env.testsToInclude2 }}"
+          echo "Run number: ${{ github.run_number }}"
+          echo "Run attempt: ${{ github.run_attempt }}"
+          echo "testsToInclude1 = ${{ env.TESTS_TO_INCLUDE_1 }}"
+          echo "testsToInclude2 = ${{ env.TESTS_TO_INCLUDE_2 }}"
+          echo "testsToInclude3 = ${{ env.TESTS_TO_INCLUDE_3 }}"
+  job2:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Run number: ${{ github.run_number }}"
+          echo "Run attempt: ${{ github.run_attempt }}"
+          exit 1
