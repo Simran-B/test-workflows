@@ -1,0 +1,61 @@
+name: Dispatch Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      testsToInclude1:
+        description: "1st set of Tests to include"
+        required: true
+        default: "smoke-test"
+        type: choice
+        options:
+          - smoke-test
+          - regression-test
+          - authentication
+          - administration
+          - auditing
+          - call-details
+          - call-list
+          - calls
+          - comment-management
+          - comments
+          - continuous-monitoring
+          - dashboard
+          - call-activity
+          - phone-activity
+          - known-unknowns
+          - lexicons
+      testsToInclude2:
+        description: "2nd set of Tests to include"
+        required: false
+        default: ""
+        type: choice
+        options:
+          - ""
+          - smoke-test
+          - regression-test
+          - authentication
+          - administration
+          - auditing
+          - call-details
+          - call-list
+          - calls
+          - comment-management
+          - comments
+          - continuous-monitoring
+          - dashboard
+          - call-activity
+          - phone-activity
+          - known-unknowns
+          - lexicons
+env:
+  TESTS_TO_INCLUDE_1: ${{ github.event.inputs.testsToInclude1 }}
+  TESTS_TO_INCLUDE_2: ${{ github.event.inputs.testsToInclude2 }}
+  
+jobs:
+  job:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "testsToInclude1 = ${{ env.testsToInclude1 }}"
+          echo "testsToInclude2 = ${{ env.testsToInclude2 }}"
