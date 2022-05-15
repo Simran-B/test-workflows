@@ -69,10 +69,36 @@ on:
           - phone-activity
           - known-unknowns
           - lexicons
+      testsToInclude4:
+        description: "4th set of Tests to include"
+        required: false
+        default: none
+        type: choice
+        options:
+          - none
+          - smoke-test
+          - regression-test
+          - authentication
+          - administration
+          - auditing
+          - call-details
+          - call-list
+          - calls
+          - comment-management
+          - comments
+          - continuous-monitoring
+          - dashboard
+          - call-activity
+          - phone-activity
+          - known-unknowns
+          - lexicons
 env:
   TESTS_TO_INCLUDE_1: ${{ github.event.inputs.testsToInclude1 }}
   TESTS_TO_INCLUDE_2: ${{ github.event.inputs.testsToInclude2 }}
   TESTS_TO_INCLUDE_3: ${{ github.event.inputs.testsToInclude3 }}
+  TESTS_TO_INCLUDE_4: ${{ github.event.inputs.testsToInclude4 }}
+  TESTS_TO_INCLUDE_4a: ${{ github.event.inputs.testsToInclude4 != 'none' && github.event.inputs.testsToInclude4 || '' }}
+  TESTS_TO_INCLUDE_4b: ${{ fromJSON(format('["{0}",""]', github.event.inputs.testsToInclude4))[github.event.inputs.testsToInclude4 == 'none'] }}
   
 jobs:
   job1:
@@ -84,6 +110,9 @@ jobs:
           echo "testsToInclude1 = ${{ env.TESTS_TO_INCLUDE_1 }}"
           echo "testsToInclude2 = ${{ env.TESTS_TO_INCLUDE_2 }}"
           echo "testsToInclude3 = ${{ env.TESTS_TO_INCLUDE_3 }}"
+          echo "testsToInclude4 = ${{ env.TESTS_TO_INCLUDE_4 }}"
+          echo "testsToInclude4a = ${{ env.TESTS_TO_INCLUDE_4a }}"
+          echo "testsToInclude4b = ${{ env.TESTS_TO_INCLUDE_4b }}"
   job2:
     runs-on: ubuntu-latest
     steps:
