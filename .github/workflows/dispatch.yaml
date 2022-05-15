@@ -104,7 +104,9 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     steps:
-      - run: |
+      - env:
+          SECRET_TYPE: DYN
+        run: |
           echo "Run number: ${{ github.run_number }}"
           echo "Run attempt: ${{ github.run_attempt }}"
           echo "testsToInclude1 = ${{ env.TESTS_TO_INCLUDE_1 }}"
@@ -113,6 +115,7 @@ jobs:
           echo "testsToInclude4 = ${{ env.TESTS_TO_INCLUDE_4 }}"
           echo "testsToInclude4a = ${{ env.TESTS_TO_INCLUDE_4a }}"
           echo "testsToInclude4b = ${{ env.TESTS_TO_INCLUDE_4b }}"
+          echo ${{ secrets[format('TEST_SECRET_{0}', env.SECRET_TYPE)] == 'foo' }}
   job2:
     runs-on: ubuntu-latest
     steps:
