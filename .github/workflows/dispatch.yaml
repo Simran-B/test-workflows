@@ -123,3 +123,8 @@ jobs:
           echo "Run number: ${{ github.run_number }}"
           echo "Run attempt: ${{ github.run_attempt }}"
           exit 1
+  job3:
+    runs-on: macos-latest
+    steps:
+      - run: sysctl hw
+      - run: system_profiler SPHardwareDataType
