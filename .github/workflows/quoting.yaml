@@ -1,0 +1,12 @@
+name: String and Quoting
+
+on:
+  workflow_dispatch:
+
+jobs:
+  literal:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          ${{ 'echo ''${{VAR}}''' }}
